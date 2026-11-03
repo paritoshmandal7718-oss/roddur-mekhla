@@ -1,0 +1,1161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mekhla ❤️ | A + P</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+:root{
+ --pink:#ff6b9d;
+ --light:#ffd4e3;
+ --gold:#ffd891;
+ --bg:#100713;
+ --card:#241321;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+ background:var(--bg);
+ color:white;
+ font-family:'Poppins',sans-serif;
+ overflow:hidden;
+ min-height:100vh;
+}
+
+button{
+ cursor:pointer;
+ border:none;
+ font-family:inherit;
+}
+
+#fireworks{
+ position:fixed;
+ inset:0;
+ z-index:10;
+ pointer-events:none;
+}
+
+#hearts{
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ overflow:hidden;
+ z-index:0;
+}
+
+.screen{
+ position:fixed;
+ inset:0;
+ min-height:100vh;
+ display:none;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ padding:25px;
+ overflow-y:auto;
+ background:
+ radial-gradient(ellipse at top,#37152d 0%,transparent 55%),
+ radial-gradient(ellipse at bottom,#291126 0%,transparent 55%),
+ #100713;
+}
+
+.screen.active{
+ display:flex;
+ animation:fadeIn .9s ease;
+}
+
+.content{
+ width:100%;
+ max-width:760px;
+ position:relative;
+ z-index:2;
+ margin:auto;
+ padding:30px 0;
+}
+
+@keyframes fadeIn{
+ from{opacity:0;transform:translateY(20px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes glow{
+ 0%,100%{text-shadow:0 0 10px #ff6b9d}
+ 50%{text-shadow:0 0 35px #ff6b9d,0 0 65px #ff4081}
+}
+
+@keyframes beat{
+ 0%,100%{transform:scale(1)}
+ 50%{transform:scale(1.2)}
+}
+
+@keyframes float{
+ 0%{transform:translateY(0) rotate(0);opacity:0}
+ 10%{opacity:1}
+ 100%{transform:translateY(-110vh) rotate(360deg);opacity:0}
+}
+
+h1{
+ font-family:'Playfair Display',serif;
+ font-size:clamp(35px,7vw,65px);
+ color:#ffd9e7;
+ line-height:1.25;
+ margin:20px 0;
+}
+
+h2{
+ font-family:'Playfair Display',serif;
+ font-size:clamp(25px,5vw,38px);
+ color:#ffb4ce;
+ margin:15px 0;
+}
+
+p{
+ font-size:15px;
+ color:#e9c6d5;
+ line-height:2;
+ margin:12px auto;
+}
+
+.script{
+ font-family:'Great Vibes',cursive;
+ color:#ff8eb4;
+ font-size:clamp(45px,9vw,85px);
+}
+
+.sub{
+ font-size:11px;
+ letter-spacing:4px;
+ color:#ff91b7;
+}
+
+.btn{
+ background:linear-gradient(120deg,#ff4785,#ff91b5);
+ color:white;
+ padding:15px 34px;
+ border-radius:50px;
+ font-size:14px;
+ letter-spacing:1px;
+ margin-top:25px;
+ box-shadow:0 0 25px #ff478566;
+ transition:.3s;
+}
+
+.btn:hover{
+ transform:translateY(-4px) scale(1.04);
+ box-shadow:0 0 40px #ff4785;
+}
+
+.heart{
+ font-size:75px;
+ display:inline-block;
+ animation:beat 1s infinite;
+ filter:drop-shadow(0 0 15px #ff4785);
+}
+
+.small-heart{
+ position:absolute;
+ bottom:-50px;
+ animation:float linear forwards;
+}
+
+.countdown{
+ font-size:120px;
+ font-family:'Playfair Display',serif;
+ color:#ff80ac;
+ animation:glow 1s infinite;
+}
+
+.loader{
+ width:min(400px,90%);
+ height:13px;
+ background:#44243b;
+ border-radius:30px;
+ margin:30px auto 15px;
+ overflow:hidden;
+}
+
+.bar{
+ width:0;
+ height:100%;
+ background:linear-gradient(90deg,#ff4785,#ffd0df);
+ border-radius:30px;
+ box-shadow:0 0 20px #ff4785;
+ transition:width .1s;
+}
+
+.percent{
+ color:#ff9ebc;
+ font-size:22px;
+}
+
+.result-box{
+ border:1px solid #ff8eb4;
+ background:#281625;
+ border-radius:25px;
+ padding:30px;
+ margin:25px auto;
+ max-width:450px;
+ box-shadow:0 0 40px #ff478522;
+}
+
+.envelope{
+ position:relative;
+ width:260px;
+ height:175px;
+ margin:35px auto;
+ background:#f9b5ca;
+ border-radius:8px;
+ box-shadow:0 0 35px #ff478566;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ cursor:pointer;
+ transition:.5s;
+}
+
+.envelope:before{
+ content:'';
+ position:absolute;
+ top:0;
+ left:0;
+ width:0;
+ height:0;
+ border-left:130px solid transparent;
+ border-right:130px solid transparent;
+ border-top:100px solid #ff7fa6;
+ transform-origin:top;
+ transition:transform .8s;
+ z-index:3;
+}
+
+.envelope.open:before{
+ transform:rotateX(180deg);
+}
+
+.envelope-heart{
+ color:#b52e63;
+ font-size:65px;
+ z-index:2;
+}
+
+.letter{
+ display:none;
+ max-width:620px;
+ margin:25px auto;
+ padding:35px;
+ border:1px solid #ff8eb4;
+ background:linear-gradient(145deg,#321a2d,#1c1020);
+ border-radius:18px;
+ text-align:left;
+ line-height:2.2;
+ box-shadow:0 0 35px #ff478533;
+ animation:fadeIn 1s;
+}
+
+.letter p{font-size:15px}
+.letter h2{text-align:center}
+
+.message-card{
+ padding:30px;
+ border:1px solid #ff80ae55;
+ border-radius:25px;
+ background:#241321;
+ max-width:600px;
+ margin:25px auto;
+ box-shadow:0 0 35px #ff478522;
+}
+
+.message-number{
+ color:#ff8eb4;
+ letter-spacing:4px;
+ font-size:12px;
+}
+
+.message-text{
+ font-family:'Playfair Display',serif;
+ font-size:clamp(24px,5vw,37px);
+ line-height:1.6;
+ color:#ffe0eb;
+ margin:25px 0;
+}
+
+.question{
+ border:1px solid #ff7ca888;
+ border-radius:18px;
+ padding:20px;
+ margin:15px auto;
+ max-width:500px;
+ background:#291727;
+}
+
+.question h2{font-size:24px}
+
+.answers{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:10px;
+}
+
+.answer{
+ padding:11px 23px;
+ border:1px solid #ff82ad;
+ background:#4a1e37;
+ color:white;
+ border-radius:30px;
+ transition:.3s;
+}
+
+.answer:hover,.answer.selected{
+ background:#ff4785;
+ box-shadow:0 0 20px #ff478566;
+}
+
+.answerError{
+ color:#ff9fbd;
+ display:none;
+ margin-top:15px;
+ font-size:14px;
+}
+
+.visualizer{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:8px;
+ height:120px;
+ margin:35px;
+}
+
+.visualizer span{
+ width:9px;
+ height:20px;
+ border-radius:10px;
+ background:linear-gradient(#ffd5e4,#ff4785);
+ animation:wave .6s infinite alternate;
+}
+
+.visualizer span:nth-child(2n){animation-delay:.2s}
+.visualizer span:nth-child(3n){animation-delay:.4s}
+.visualizer.paused span{animation-play-state:paused}
+
+@keyframes wave{
+ to{height:100px}
+}
+
+.music-status{
+ font-size:12px;
+ letter-spacing:3px;
+ color:#ff9fbd;
+}
+
+.ring-container{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ margin:40px 0;
+}
+
+.ring{
+ width:100px;
+ height:100px;
+ border:9px solid #f5cc7c;
+ border-radius:50%;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-family:'Playfair Display',serif;
+ font-size:30px;
+ color:#ffdb91;
+ box-shadow:0 0 20px #ffd89188,inset 0 0 15px #ffd89144;
+ animation:ringAppear 2s infinite alternate;
+}
+
+.ring:nth-child(2){margin-left:-12px}
+
+@keyframes ringAppear{
+ to{
+  transform:translateY(-8px);
+  box-shadow:0 0 45px #ffd891;
+ }
+}
+
+.final-card{
+ max-width:600px;
+ padding:35px;
+ border:1px solid #ff9ebc;
+ border-radius:25px;
+ background:#281625;
+ margin:auto;
+ box-shadow:0 0 50px #ff478533;
+}
+
+@media(max-width:500px){
+ .screen{padding:18px}
+ .letter{padding:22px}
+ .countdown{font-size:90px}
+ .ring{width:75px;height:75px}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+<div id="hearts"></div>
+
+<!-- SCREEN 1: COUNTDOWN -->
+
+<section class="screen active" id="s1">
+ <div class="content">
+  <p class="sub">A PRIVATE SURPRISE FOR MEKHLA</p>
+  <div class="countdown" id="count">3</div>
+  <h1>Something Magical Is About To Begin</h1>
+  <p>Made with a little love and lots of memories.</p>
+ </div>
+</section>
+
+<!-- SCREEN 2: LOADING -->
+
+<section class="screen" id="s2">
+ <div class="content">
+  <div class="script">Welcome to</div>
+  <h1>Initializing Love.com</h1>
+  <p>Connecting hearts and collecting beautiful memories...</p>
+  <div class="loader"><div class="bar" id="bar"></div></div>
+  <div class="percent" id="percent">0%</div>
+  <p id="loadText">Preparing something special...</p>
+ </div>
+</section>
+
+<!-- SCREEN 3: RESULT -->
+
+<section class="screen" id="s3">
+ <div class="content">
+  <p class="sub">SEARCH COMPLETE</p>
+  <h1>One Result Found!</h1>
+
+  <div class="result-box">
+   <div class="heart">💗</div>
+   <h2>The Prettiest Smile</h2>
+   <h1 style="font-size:43px">MEKHLA</h1>
+   <p>Match Accuracy: 100%</p>
+   <p>Category: One Of A Kind</p>
+   <p>Status: Absolutely Special ❤️</p>
+  </div>
+
+  <button class="btn" onclick="show(4)">SEE RESULT ✨</button>
+ </div>
+</section>
+
+<!-- SCREEN 4: LETTER -->
+
+<section class="screen" id="s4">
+ <div class="content">
+  <p class="sub">A LETTER FROM THE HEART</p>
+  <div class="script">For You...</div>
+  <h1>Your Secret Letter</h1>
+
+  <div class="envelope" id="env" onclick="openLetter()">
+   <div class="envelope-heart">❤️</div>
+  </div>
+
+  <p>Press the heart to open your letter.</p>
+
+  <div class="letter" id="letter">
+   <h2>Dear Mekhla, ❤️</h2>
+
+   <p>
+   I don't know where to begin, because there are so many little
+   things I want to tell you.
+   </p>
+
+   <p>
+   Seven months. Just think about it.
+   Seven months of us, of conversations, of laughter,
+   of little arguments, of making up, and of memories
+   that I never want to forget.
+   </p>
+
+   <p>
+   Sometimes I look back at our beginning and wonder how
+   someone who was once just a person I knew became
+   such an important part of my everyday life.
+   </p>
+
+   <p>
+   I remember our little moments. The random talks,
+   the silly jokes, the unexpected smiles,
+   and those conversations that made time fly.
+   </p>
+
+   <p>
+   Maybe I don't always express everything perfectly.
+   Maybe sometimes I run out of words.
+   But that doesn't mean the feelings aren't there.
+   </p>
+
+   <p>
+   You are someone I genuinely appreciate.
+   I love the memories we have made,
+   and I want to keep creating more of them with you.
+   </p>
+
+   <p>
+   I don't want a perfect story.
+   I want a real one.
+   One where we understand each other,
+   respect each other, support each other,
+   and keep choosing kindness even on difficult days.
+   </p>
+
+   <p>
+   Seven months down, and hopefully so many beautiful
+   chapters still waiting for us.
+   </p>
+
+   <p>Thank you for being you, Mekhla.</p>
+
+   <p style="text-align:center">
+    <span class="script">Always special,</span><br>
+    <strong>Yours, Roddur ❤️</strong>
+   </p>
+
+   <button class="btn" onclick="show(5)">CONTINUE ❤️</button>
+  </div>
+ </div>
+</section>
+
+<!-- SCREEN 5 -->
+
+<section class="screen" id="s5">
+ <div class="content">
+  <div class="message-card">
+   <p class="message-number">A LITTLE REMINDER · 01</p>
+   <div class="heart">🌷</div>
+   <div class="message-text">
+    Your smile has a special way of making an ordinary day beautiful.
+   </div>
+  </div>
+  <button class="btn" onclick="show(6)">NEXT SURPRISE →</button>
+ </div>
+</section>
+
+<!-- SCREEN 6 -->
+
+<section class="screen" id="s6">
+ <div class="content">
+  <div class="message-card">
+   <p class="message-number">A LITTLE REMINDER · 02</p>
+   <div class="heart">🦋</div>
+   <div class="message-text">
+    If happiness had a favourite notification, it would probably be your name.
+   </div>
+  </div>
+  <button class="btn" onclick="show(7)">NEXT SURPRISE →</button>
+ </div>
+</section>
+
+<!-- SCREEN 7 -->
+
+<section class="screen" id="s7">
+ <div class="content">
+  <div class="message-card">
+   <p class="message-number">A LITTLE REMINDER · 03</p>
+   <div class="heart">✨</div>
+   <div class="message-text">
+    You make even the simplest conversations feel worth remembering.
+   </div>
+  </div>
+  <button class="btn" onclick="show(8)">NEXT SURPRISE →</button>
+ </div>
+</section>
+
+<!-- SCREEN 8 -->
+
+<section class="screen" id="s8">
+ <div class="content">
+  <div class="message-card">
+   <p class="message-number">A LITTLE REMINDER · 04</p>
+   <div class="heart">🌙</div>
+   <div class="message-text">
+    Here's to more midnight conversations, unexpected laughter and little adventures.
+   </div>
+  </div>
+  <button class="btn" onclick="show(9)">NEXT SURPRISE →</button>
+ </div>
+</section>
+
+<!-- SCREEN 9 -->
+
+<section class="screen" id="s9">
+ <div class="content">
+  <div class="message-card">
+   <p class="message-number">A LITTLE REMINDER · 05</p>
+   <div class="heart">💝</div>
+   <div class="message-text">
+    Out of all the little things life brings, I am grateful for this chapter called US.
+   </div>
+  </div>
+  <button class="btn" onclick="show(10)">ONE LAST THING... ❤️</button>
+ </div>
+</section>
+
+<!-- SCREEN 10: QUESTIONS -->
+
+<section class="screen" id="s10">
+ <div class="content">
+  <p class="sub">A VERY IMPORTANT SURVEY</p>
+  <h1>Our Little Plans ❤️</h1>
+  <p>I have three tiny questions for you.</p>
+
+  <div class="question">
+   <h2>☕ Coffee Date?</h2>
+   <div class="answers">
+    <button class="answer" data-correct="false" onclick="choose(this)">YES</button>
+    <button class="answer" data-correct="true" onclick="choose(this)">ALWAYS</button>
+   </div>
+  </div>
+
+  <div class="question">
+   <h2>🚶 Long Walk?</h2>
+   <div class="answers">
+    <button class="answer" data-correct="false" onclick="choose(this)">YES</button>
+    <button class="answer" data-correct="true" onclick="choose(this)">ALWAYS</button>
+   </div>
+  </div>
+
+  <div class="question">
+   <h2>🌙 Late Night Talks?</h2>
+   <div class="answers">
+    <button class="answer" data-correct="false" onclick="choose(this)">100%</button>
+    <button class="answer" data-correct="true" onclick="choose(this)">FOREVER</button>
+   </div>
+  </div>
+
+  <button class="btn" onclick="submitAnswers()">
+   SUBMIT MY LITTLE ANSWERS ❤️
+  </button>
+
+  <p class="answerError" id="answerError">
+   Please choose the right answers! 💗
+  </p>
+ </div>
+</section>
+
+<!-- SCREEN 11: MUSIC -->
+
+<section class="screen" id="s11">
+ <div class="content">
+  <p class="sub">A MOMENT JUST FOR YOU</p>
+  <div class="script">Our Melody</div>
+  <h1>Some Feelings Need Music</h1>
+  <p>A little original melody made for this moment.</p>
+
+  <div class="visualizer paused" id="visualizer">
+   <span></span><span></span><span></span>
+   <span></span><span></span><span></span>
+   <span></span><span></span><span></span>
+   <span></span><span></span><span></span>
+   <span></span>
+  </div>
+
+  <p class="music-status" id="musicStatus">MUSIC READY</p>
+
+  <button class="btn" id="musicBtn" onclick="toggleMusic()">
+   ▶ PLAY MUSIC
+  </button>
+
+  <br>
+
+  <button class="btn" onclick="show(12)">NEXT ❤️</button>
+ </div>
+</section>
+
+<!-- SCREEN 12: RINGS -->
+
+<section class="screen" id="s12">
+ <div class="content">
+  <p class="sub">A LITTLE SYMBOL OF OUR STORY</p>
+  <div class="script">A & P</div>
+
+  <div class="ring-container">
+   <div class="ring">A</div>
+   <div class="ring">P</div>
+  </div>
+
+  <h1>Two Initials, One Beautiful Story</h1>
+
+  <p>
+   Not a perfect fairytale, but a real story.
+   A story built with trust, respect, patience and love.
+  </p>
+
+  <button class="btn" onclick="show(13)">
+   OPEN THE FINAL MESSAGE 💍
+  </button>
+ </div>
+</section>
+
+<!-- SCREEN 13: FINAL -->
+
+<section class="screen" id="s13">
+ <div class="content">
+  <div class="final-card">
+   <p class="sub">MY FINAL LITTLE MESSAGE</p>
+   <div class="heart">💍</div>
+
+   <h1>Dear Mekhla,</h1>
+
+   <div class="ring-container">
+    <div class="ring">A</div>
+    <div class="ring">P</div>
+   </div>
+
+   <h2>Happy 7 Months ❤️</h2>
+
+   <p>
+    I don't know exactly what the future holds,
+    but I know I would love to keep making
+    beautiful memories with you.
+   </p>
+
+   <p>
+    I want more coffee dates,
+    more long walks,
+    more silly jokes,
+    more late-night conversations,
+    and more reasons to smile together.
+   </p>
+
+   <p>
+    I promise to keep learning,
+    understanding and appreciating you.
+    Not just on special days,
+    but in all the ordinary days too.
+   </p>
+
+   <h2 class="script">
+    Will you keep writing this story with me?
+   </h2>
+
+   <p>With all my affection,</p>
+
+   <h1 style="font-size:55px">A ❤️ P</h1>
+
+   <p class="sub">SEVEN MONTHS & COUNTING...</p>
+
+   <button class="btn" onclick="celebrateAgain()">
+    CELEBRATE US 🎉
+   </button>
+  </div>
+ </div>
+</section>
+
+<script>
+
+// SCREEN NAVIGATION
+
+function show(n){
+
+ document.querySelectorAll('.screen').forEach(s=>{
+  s.classList.remove('active');
+ });
+
+ document.getElementById('s'+n).classList.add('active');
+
+ if(n===2)startLoader();
+
+ if(n===12 || n===13)fireworks(70);
+}
+
+// COUNTDOWN
+
+let num=3;
+
+let countdown=setInterval(()=>{
+
+ num--;
+
+ if(num>0){
+
+  document.getElementById('count').innerText=num;
+
+ }else{
+
+  clearInterval(countdown);
+
+  document.getElementById('count').innerText='🎉';
+
+  fireworks(130);
+
+  setTimeout(()=>show(2),1700);
+ }
+
+},1100);
+
+// LOADING
+
+let loadingStarted=false;
+
+function startLoader(){
+
+ if(loadingStarted)return;
+
+ loadingStarted=true;
+
+ let progress=0;
+
+ const bar=document.getElementById('bar');
+ const percent=document.getElementById('percent');
+ const text=document.getElementById('loadText');
+
+ let timer=setInterval(()=>{
+
+  progress++;
+
+  bar.style.width=progress+'%';
+  percent.innerText=progress+'%';
+
+  if(progress===10)
+   text.innerText='Initializing romantic database...';
+
+  if(progress===25)
+   text.innerText='Searching for the prettiest smile...';
+
+  if(progress===45)
+   text.innerText='Scanning beautiful memories...';
+
+  if(progress===65)
+   text.innerText='Searching the universe...';
+
+  if(progress===80)
+   text.innerText='Almost found the one...';
+
+  if(progress===95)
+   text.innerText='One special person detected!';
+
+  if(progress>=100){
+
+   clearInterval(timer);
+
+   text.innerText='FOUND: MEKHLA ❤️';
+
+   setTimeout(()=>show(3),1800);
+  }
+
+ },45);
+}
+
+// LETTER OPENING
+
+function openLetter(){
+
+ const envelope=document.getElementById('env');
+ const letter=document.getElementById('letter');
+
+ envelope.classList.add('open');
+
+ setTimeout(()=>{
+
+  letter.style.display='block';
+  envelope.style.display='none';
+
+ },500);
+}
+
+// FLOATING HEARTS
+
+setInterval(()=>{
+
+ const heart=document.createElement('div');
+
+ heart.className='small-heart';
+
+ heart.innerText=['❤️','💕','💗','🌸','✨','💖'][
+  Math.floor(Math.random()*6)
+ ];
+
+ heart.style.left=Math.random()*100+'%';
+
+ heart.style.fontSize=(15+Math.random()*25)+'px';
+
+ heart.style.animationDuration=(5+Math.random()*5)+'s';
+
+ document.getElementById('hearts').appendChild(heart);
+
+ setTimeout(()=>heart.remove(),10000);
+
+},550);
+
+// ANSWER SELECTION
+
+function choose(btn){
+
+ const parent=btn.parentElement;
+
+ parent.querySelectorAll('.answer').forEach(b=>{
+  b.classList.remove('selected');
+ });
+
+ btn.classList.add('selected');
+
+ document.getElementById('answerError').style.display='none';
+}
+
+// STRICT ANSWER VALIDATION
+
+function submitAnswers(){
+
+ const questions=document.querySelectorAll('#s10 .question');
+
+ let allCorrect=true;
+ let allSelected=true;
+
+ questions.forEach(question=>{
+
+  const selected=question.querySelector('.answer.selected');
+
+  if(!selected){
+
+   allSelected=false;
+   allCorrect=false;
+
+  }else if(selected.dataset.correct!=='true'){
+
+   allCorrect=false;
+
+  }
+
+ });
+
+ const error=document.getElementById('answerError');
+
+ if(!allSelected){
+
+  error.innerText='Please answer all three questions first! 💗';
+
+  error.style.display='block';
+
+  return;
+ }
+
+ if(!allCorrect){
+
+  error.innerText='Oops! Try choosing the other answer! 🙈❤️';
+
+  error.style.display='block';
+
+  return;
+ }
+
+ error.style.display='none';
+
+ fireworks(70);
+
+ setTimeout(()=>{
+  show(11);
+ },700);
+}
+
+// FIREWORKS
+
+const canvas=document.getElementById('fireworks');
+const ctx=canvas.getContext('2d');
+
+let particles=[];
+
+function resize(){
+
+ canvas.width=window.innerWidth;
+ canvas.height=window.innerHeight;
+}
+
+resize();
+
+window.addEventListener('resize',resize);
+
+function fireworks(amount=70){
+
+ for(let i=0;i<amount;i++){
+
+  let x=Math.random()*canvas.width;
+  let y=Math.random()*canvas.height*.7;
+
+  for(let j=0;j<30;j++){
+
+   let angle=Math.random()*Math.PI*2;
+   let speed=Math.random()*5+1;
+
+   particles.push({
+
+    x,y,
+
+    vx:Math.cos(angle)*speed,
+    vy:Math.sin(angle)*speed,
+
+    life:90,
+
+    color:['#ff80ae','#ffd27e','#ffffff','#c99bff'][
+     Math.floor(Math.random()*4)
+    ]
+
+   });
+  }
+ }
+}
+
+function animate(){
+
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ particles.forEach((p,i)=>{
+
+  p.x+=p.vx;
+  p.y+=p.vy;
+  p.vy+=.035;
+
+  p.life--;
+
+  ctx.globalAlpha=Math.max(0,p.life/90);
+  ctx.fillStyle=p.color;
+
+  ctx.beginPath();
+  ctx.arc(p.x,p.y,2,0,Math.PI*2);
+  ctx.fill();
+
+  if(p.life<=0)particles.splice(i,1);
+
+ });
+
+ ctx.globalAlpha=1;
+
+ requestAnimationFrame(animate);
+}
+
+animate();
+
+// MUSIC SYSTEM
+
+let audioContext=null;
+let musicTimer=null;
+let musicPlaying=false;
+let noteIndex=0;
+
+const melody=[
+ 261.63,329.63,392,440,
+ 392,329.63,293.66,349.23,
+ 392,349.23,329.63,261.63
+];
+
+function toggleMusic(){
+
+ if(musicPlaying){
+
+  stopMusic();
+  return;
+ }
+
+ try{
+
+  const AC=window.AudioContext||window.webkitAudioContext;
+
+  audioContext=new AC();
+
+  audioContext.resume();
+
+  musicPlaying=true;
+
+  document.getElementById('musicStatus').innerText='NOW PLAYING ❤️';
+
+  document.getElementById('musicBtn').innerText='Ⅱ PAUSE MUSIC';
+
+  document.getElementById('visualizer').classList.remove('paused');
+
+  musicTimer=setInterval(()=>{
+
+   if(!musicPlaying)return;
+
+   const oscillator=audioContext.createOscillator();
+
+   const gain=audioContext.createGain();
+
+   oscillator.type='sine';
+
+   oscillator.frequency.value=
+    melody[noteIndex%melody.length];
+
+   gain.gain.setValueAtTime(
+    .0001,audioContext.currentTime
+   );
+
+   gain.gain.exponentialRampToValueAtTime(
+    .065,audioContext.currentTime+.08
+   );
+
+   gain.gain.exponentialRampToValueAtTime(
+    .0001,audioContext.currentTime+.7
+   );
+
+   oscillator.connect(gain);
+
+   gain.connect(audioContext.destination);
+
+   oscillator.start();
+
+   oscillator.stop(audioContext.currentTime+.75);
+
+   noteIndex++;
+
+  },650);
+
+ }catch(error){
+
+  document.getElementById('musicStatus').innerText=
+   'Music could not start in this browser.';
+ }
+}
+
+function stopMusic(){
+
+ musicPlaying=false;
+
+ clearInterval(musicTimer);
+
+ if(audioContext){
+
+  audioContext.close();
+
+  audioContext=null;
+ }
+
+ document.getElementById('musicStatus').innerText='MUSIC PAUSED';
+
+ document.getElementById('musicBtn').innerText='▶ PLAY MUSIC';
+
+ document.getElementById('visualizer').classList.add('paused');
+}
+
+// FINAL CELEBRATION
+
+function celebrateAgain(){
+
+ fireworks(180);
+
+ for(let i=0;i<50;i++){
+
+  setTimeout(()=>{
+   fireworks(4);
+  },i*100);
+ }
+}
+
+</script>
+
+</body>
+</html>
